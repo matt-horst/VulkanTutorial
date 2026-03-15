@@ -1,0 +1,112 @@
+[
+  {
+    "file": "/home/matt/code/Vulkan-Tutorial/00_base_code.cpp",
+    "arguments": [
+      "c++",
+      "-DVULKAN_HPP_DISPATCH_LOADER_DYNAMIC=1",
+      "-DVULKAN_HPP_HANDLE_ERROR_OUT_OF_DATE_AS_SUCCESS",
+      "-DVULKAN_HPP_NO_STRUCT_CONSTRUCTORS=1",
+      "-I/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-src",
+      "-I/home/matt/code/Vulkan-Tutorial/build/_deps/tinyobj-src",
+      "-I/include",
+      "-isystem",
+      "/home/matt/vulkan/1.4.341.1/x86_64/include",
+      "-g",
+      "-std=gnu++20",
+      "-MD",
+      "-MT",
+      "CMakeFiles/00_base_code.dir/00_base_code.cpp.o",
+      "-MF",
+      "CMakeFiles/00_base_code.dir/00_base_code.cpp.o.d",
+      "-o",
+      "CMakeFiles/00_base_code.dir/00_base_code.cpp.o",
+      "-c",
+      "/home/matt/code/Vulkan-Tutorial/00_base_code.cpp"
+    ],
+    "directory": "/home/matt/code/Vulkan-Tutorial/build",
+    "output": "CMakeFiles/00_base_code.dir/00_base_code.cpp.o"
+  },
+  {
+    "file": "/home/matt/code/Vulkan-Tutorial/01_instance_creation.cpp",
+    "arguments": [
+      "c++",
+      "-DVULKAN_HPP_DISPATCH_LOADER_DYNAMIC=1",
+      "-DVULKAN_HPP_HANDLE_ERROR_OUT_OF_DATE_AS_SUCCESS",
+      "-DVULKAN_HPP_NO_STRUCT_CONSTRUCTORS=1",
+      "-I/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-src",
+      "-I/home/matt/code/Vulkan-Tutorial/build/_deps/tinyobj-src",
+      "-I/include",
+      "-isystem",
+      "/home/matt/vulkan/1.4.341.1/x86_64/include",
+      "-g",
+      "-std=gnu++20",
+      "-MD",
+      "-MT",
+      "CMakeFiles/01_instance_creation.dir/01_instance_creation.cpp.o",
+      "-MF",
+      "CMakeFiles/01_instance_creation.dir/01_instance_creation.cpp.o.d",
+      "-o",
+      "CMakeFiles/01_instance_creation.dir/01_instance_creation.cpp.o",
+      "-c",
+      "/home/matt/code/Vulkan-Tutorial/01_instance_creation.cpp"
+    ],
+    "directory": "/home/matt/code/Vulkan-Tutorial/build",
+    "output": "CMakeFiles/01_instance_creation.dir/01_instance_creation.cpp.o"
+  },
+  {
+    "file": "/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-src/loader_example.cc",
+    "arguments": [
+      "c++",
+      "-g",
+      "-std=c++11",
+      "-MD",
+      "-MT",
+      "_deps/tinygltf-build/CMakeFiles/loader_example.dir/loader_example.cc.o",
+      "-MF",
+      "CMakeFiles/loader_example.dir/loader_example.cc.o.d",
+      "-o",
+      "CMakeFiles/loader_example.dir/loader_example.cc.o",
+      "-c",
+      "/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-src/loader_example.cc"
+    ],
+    "directory": "/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-build",
+    "output": "CMakeFiles/loader_example.dir/loader_example.cc.o"
+  },
+  {
+    "file": "/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-src/tiny_gltf.cc",
+    "arguments": [
+      "c++",
+      "-g",
+      "-std=c++11",
+      "-MD",
+      "-MT",
+      "_deps/tinygltf-build/CMakeFiles/tinygltf.dir/tiny_gltf.cc.o",
+      "-MF",
+      "CMakeFiles/tinygltf.dir/tiny_gltf.cc.o.d",
+      "-o",
+      "CMakeFiles/tinygltf.dir/tiny_gltf.cc.o",
+      "-c",
+      "/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-src/tiny_gltf.cc"
+    ],
+    "directory": "/home/matt/code/Vulkan-Tutorial/build/_deps/tinygltf-build",
+    "output": "CMakeFiles/tinygltf.dir/tiny_gltf.cc.o"
+  },
+  {
+    "file": "/home/matt/code/Vulkan-Tutorial/build/_deps/tinyobj-src/tiny_obj_loader.cc",
+    "arguments": [
+      "c++",
+      "-g",
+      "-MD",
+      "-MT",
+      "_deps/tinyobj-build/CMakeFiles/tinyobjloader.dir/tiny_obj_loader.cc.o",
+      "-MF",
+      "CMakeFiles/tinyobjloader.dir/tiny_obj_loader.cc.o.d",
+      "-o",
+      "CMakeFiles/tinyobjloader.dir/tiny_obj_loader.cc.o",
+      "-c",
+      "/home/matt/code/Vulkan-Tutorial/build/_deps/tinyobj-src/tiny_obj_loader.cc"
+    ],
+    "directory": "/home/matt/code/Vulkan-Tutorial/build/_deps/tinyobj-build",
+    "output": "CMakeFiles/tinyobjloader.dir/tiny_obj_loader.cc.o"
+  }
+]
