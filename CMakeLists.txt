@@ -233,10 +233,10 @@ add_chapter (19_vertexbuffer
   SHADER 19_shader_vertexbuffer
   LIBS glm::glm)
 
-# add_chapter (20_staging_buffer
-#   SHADER 19_shader_vertexbuffer
-#   LIBS glm::glm)
-#
+add_chapter (20_staging_buffer
+  SHADER 19_shader_vertexbuffer
+  LIBS glm::glm)
+
 # add_chapter (21_index_buffer
 #   SHADER 19_shader_vertexbuffer
 #   LIBS glm::glm)

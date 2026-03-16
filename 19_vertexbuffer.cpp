@@ -90,6 +90,8 @@ class HelloTriangleApplication {
   std::vector<vk::raii::Semaphore> renderFinishedSemaphores;
   std::vector<vk::raii::Fence> inFlightFences;
   vk::raii::DebugUtilsMessengerEXT debugMessenger = nullptr;
+  vk::raii::Buffer vertexBuffer = nullptr;
+  vk::raii::DeviceMemory vertexBufferMemory = nullptr;
   uint32_t frameIndex = 0;
   bool framebufferResized = false;
 
@@ -122,8 +124,47 @@ class HelloTriangleApplication {
     createImageViews();
     createGraphicsPipeline();
     createCommandPool();
+    createVertexBuffer();
     createCommandBuffers();
     createSyncObjects();
+  }
+
+  void createVertexBuffer() {
+    vk::BufferCreateInfo bufferCI{
+        .size = static_cast<uint32_t>(sizeof(Vertex) * vertices.size()),
+        .usage = vk::BufferUsageFlagBits::eVertexBuffer,
+        .sharingMode = vk::SharingMode::eExclusive,
+    };
+
+    vertexBuffer = vk::raii::Buffer(device, bufferCI);
+
+    vk::MemoryRequirements memoryReqs = vertexBuffer.getMemoryRequirements();
+
+    vk::MemoryAllocateInfo memoryAI{
+        .allocationSize = memoryReqs.size,
+        .memoryTypeIndex = findMemoryType(memoryReqs.memoryTypeBits, vk::MemoryPropertyFlagBits::eHostVisible |
+                                                                         vk::MemoryPropertyFlagBits::eHostCoherent),
+    };
+
+    vertexBufferMemory = vk::raii::DeviceMemory(device, memoryAI);
+
+    vertexBuffer.bindMemory(*vertexBufferMemory, 0);
+
+    void* data = vertexBufferMemory.mapMemory(0, bufferCI.size);
+    memcpy(data, vertices.data(), bufferCI.size);
+    vertexBufferMemory.unmapMemory();
+  }
+
+  uint32_t findMemoryType(uint32_t typeFilter, vk::MemoryPropertyFlags properties) {
+    const auto memProperties = physicalDevice.getMemoryProperties();
+
+    for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
+      if (typeFilter & (1 << i) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
+        return i;
+      }
+    }
+
+    throw std::runtime_error("failed to find suitable memory type");
   }
 
   void mainLoop() {
@@ -656,11 +697,12 @@ class HelloTriangleApplication {
     commandBuffers[frameIndex].beginRendering(renderingInfo);
 
     commandBuffers[frameIndex].bindPipeline(vk::PipelineBindPoint::eGraphics, graphicsPipeline);
+    commandBuffers[frameIndex].bindVertexBuffers(0, *vertexBuffer, {0});
     commandBuffers[frameIndex].setViewport(0, vk::Viewport{0.0f, 0.0f, static_cast<float>(swapchainExtent.width),
                                                            static_cast<float>(swapchainExtent.height)});
     commandBuffers[frameIndex].setScissor(0, vk::Rect2D{vk::Offset2D{0, 0}, swapchainExtent});
 
-    commandBuffers[frameIndex].draw(3, 1, 0, 0);
+    commandBuffers[frameIndex].draw(static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
     commandBuffers[frameIndex].endRendering();
 
