@@ -211,6 +211,9 @@ add_chapter (09_shader_modules
 add_chapter (10_fixed_functions
   SHADER 09_shader_base)
 
+add_chapter (11_render_pass
+  SHADER 09_shader_base)
+
 # add_chapter (12_graphics_pipeline_complete
 #   SHADER 09_shader_base)
 #
