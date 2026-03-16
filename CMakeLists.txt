@@ -217,9 +217,9 @@ add_chapter (11_render_pass
 add_chapter (12_graphics_pipeline_complete
   SHADER 09_shader_base)
 
-# add_chapter (14_command_buffers
-#   SHADER 09_shader_base)
-#
+add_chapter (14_command_buffers
+  SHADER 09_shader_base)
+
 # add_chapter (15_hello_triangle
 #   SHADER 09_shader_base)
 #
