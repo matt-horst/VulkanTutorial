@@ -226,9 +226,9 @@ add_chapter (15_hello_triangle
 add_chapter (16_frames_in_flight
   SHADER 09_shader_base)
 
-# add_chapter (17_swap_chain_recreation
-#   SHADER 09_shader_base)
-#
+add_chapter (17_swap_chain_recreation
+  SHADER 09_shader_base)
+
 # add_chapter (19_vertex_buffer
 #   SHADER 19_shader_vertexbuffer
 #   LIBS glm::glm)
