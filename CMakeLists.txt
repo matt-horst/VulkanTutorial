@@ -220,9 +220,9 @@ add_chapter (12_graphics_pipeline_complete
 add_chapter (14_command_buffers
   SHADER 09_shader_base)
 
-# add_chapter (15_hello_triangle
-#   SHADER 09_shader_base)
-#
+add_chapter (15_hello_triangle
+  SHADER 09_shader_base)
+
 # add_chapter (16_frames_in_flight
 #   SHADER 09_shader_base)
 #
