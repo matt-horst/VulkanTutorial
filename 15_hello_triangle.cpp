@@ -95,6 +95,8 @@ class HelloTriangleApplication {
       glfwPollEvents();
       drawFrame();
     }
+
+    graphicsQueue.waitIdle();
   }
 
   void drawFrame() {
