@@ -302,7 +302,10 @@ class HelloTriangleApplication {
   }
 
   uint32_t chooseSwapMinImageCount(const vk::SurfaceCapabilitiesKHR& surfaceCapabilities) {
-    const auto minImageCount = std::clamp(3u, surfaceCapabilities.minImageCount, surfaceCapabilities.maxImageCount);
+    auto minImageCount = std::max(3u, surfaceCapabilities.minImageCount);
+    if (minImageCount < surfaceCapabilities.maxImageCount) {
+        minImageCount = surfaceCapabilities.maxImageCount;
+    }
 
     return minImageCount;
   }
