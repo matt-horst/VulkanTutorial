@@ -84,35 +84,42 @@ class HelloTriangleApplication {
   GLFWwindow* window;
   vk::raii::Context context;
   vk::raii::Instance instance = nullptr;
+  vk::raii::DebugUtilsMessengerEXT debugMessenger = nullptr;
+  vk::raii::SurfaceKHR surface = nullptr;
   vk::raii::PhysicalDevice physicalDevice = nullptr;
   vk::raii::Device device = nullptr;
+  uint32_t graphicsIndex = ~0;
   vk::raii::Queue graphicsQueue = nullptr;
-  uint32_t graphicsIndex;
-  vk::raii::SurfaceKHR surface = nullptr;
   vk::raii::SwapchainKHR swapchain = nullptr;
-  vk::raii::DescriptorSetLayout descriptorSetLayout = nullptr;
-  vk::raii::Pipeline graphicsPipeline = nullptr;
   std::vector<vk::Image> swapchainImages;
   vk::SurfaceFormatKHR swapchainSurfaceFormat;
   vk::Extent2D swapchainExtent;
   std::vector<vk::raii::ImageView> swapchainImageViews;
+
+  vk::raii::DescriptorSetLayout descriptorSetLayout = nullptr;
   vk::raii::PipelineLayout pipelineLayout = nullptr;
-  vk::raii::CommandPool commandPool = nullptr;
-  std::vector<vk::raii::CommandBuffer> commandBuffers;
-  std::vector<vk::raii::Semaphore> presentCompleteSemaphores;
-  std::vector<vk::raii::Semaphore> renderFinishedSemaphores;
-  std::vector<vk::raii::Fence> inFlightFences;
-  vk::raii::DebugUtilsMessengerEXT debugMessenger = nullptr;
+  vk::raii::Pipeline graphicsPipeline = nullptr;
+
   vk::raii::Buffer vertexBuffer = nullptr;
   vk::raii::DeviceMemory vertexBufferMemory = nullptr;
   vk::raii::Buffer indexBuffer = nullptr;
   vk::raii::DeviceMemory indexBufferMemory = nullptr;
+
   std::vector<vk::raii::Buffer> uniformBuffers;
   std::vector<vk::raii::DeviceMemory> uniformBuffersMemory;
   std::vector<void*> uniformBuffersMapped;
+
   vk::raii::DescriptorPool descriptorPool = nullptr;
   std::vector<vk::raii::DescriptorSet> descriptorSets;
+
+  vk::raii::CommandPool commandPool = nullptr;
+  std::vector<vk::raii::CommandBuffer> commandBuffers;
+
+  std::vector<vk::raii::Semaphore> presentCompleteSemaphores;
+  std::vector<vk::raii::Semaphore> renderFinishedSemaphores;
+  std::vector<vk::raii::Fence> inFlightFences;
   uint32_t frameIndex = 0;
+
   bool framebufferResized = false;
 
   void initWindow() {
@@ -335,7 +342,7 @@ class HelloTriangleApplication {
       drawFrame();
     }
 
-    graphicsQueue.waitIdle();
+    device.waitIdle();
   }
 
   void recreateSwapchain() {
