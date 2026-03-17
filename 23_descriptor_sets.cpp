@@ -109,6 +109,8 @@ class HelloTriangleApplication {
   std::vector<vk::raii::Buffer> uniformBuffers;
   std::vector<vk::raii::DeviceMemory> uniformBuffersMemory;
   std::vector<void*> uniformBuffersMapped;
+  vk::raii::DescriptorPool descriptorPool = nullptr;
+  std::vector<vk::raii::DescriptorSet> descriptorSets;
   uint32_t frameIndex = 0;
   bool framebufferResized = false;
 
@@ -145,8 +147,57 @@ class HelloTriangleApplication {
     createVertexBuffer();
     createIndexBuffer();
     createUniformBuffers();
+    createDescriptorPool();
+    createDescriptorSets();
     createCommandBuffers();
     createSyncObjects();
+  }
+
+  void createDescriptorSets() {
+    std::vector<vk::DescriptorSetLayout> layout(FRAMES_IN_FLIGHT, *descriptorSetLayout);
+    vk::DescriptorSetAllocateInfo descriptorSetAI{
+        .descriptorPool = descriptorPool,
+        .descriptorSetCount = static_cast<uint32_t>(layout.size()),
+        .pSetLayouts = layout.data(),
+    };
+
+    descriptorSets.clear();
+    descriptorSets = device.allocateDescriptorSets(descriptorSetAI);
+
+    for (auto i = 0; i < descriptorSets.size(); i++) {
+      vk::DescriptorBufferInfo descriptorBufferInfo{
+          .buffer = uniformBuffers[i],
+          .offset = 0,
+          .range = sizeof(ShaderData),
+      };
+
+      vk::WriteDescriptorSet writeDescriptorSet{
+          .dstSet = descriptorSets[i],
+          .dstBinding = 0,
+          .dstArrayElement = 0,
+          .descriptorCount = 1,
+          .descriptorType = vk::DescriptorType::eUniformBuffer,
+          .pBufferInfo = &descriptorBufferInfo,
+      };
+
+      device.updateDescriptorSets(writeDescriptorSet, {});
+    }
+  }
+
+  void createDescriptorPool() {
+    vk::DescriptorPoolSize poolSize{
+        .type = vk::DescriptorType::eUniformBuffer,
+        .descriptorCount = FRAMES_IN_FLIGHT,
+    };
+
+    vk::DescriptorPoolCreateInfo poolCI{
+        .flags = vk::DescriptorPoolCreateFlagBits::eFreeDescriptorSet,
+        .maxSets = FRAMES_IN_FLIGHT,
+        .poolSizeCount = 1,
+        .pPoolSizes = &poolSize,
+    };
+
+    descriptorPool = vk::raii::DescriptorPool(device, poolCI);
   }
 
   void createUniformBuffers() {
@@ -692,7 +743,7 @@ class HelloTriangleApplication {
         .rasterizerDiscardEnable = vk::False,
         .polygonMode = vk::PolygonMode::eFill,
         .cullMode = vk::CullModeFlagBits::eBack,
-        .frontFace = vk::FrontFace::eClockwise,
+        .frontFace = vk::FrontFace::eCounterClockwise,
         .depthBiasEnable = vk::False,
         .depthBiasSlopeFactor = 1.0f,
         .lineWidth = 1.0f,
@@ -812,6 +863,8 @@ class HelloTriangleApplication {
     commandBuffers[frameIndex].bindPipeline(vk::PipelineBindPoint::eGraphics, graphicsPipeline);
     commandBuffers[frameIndex].bindVertexBuffers(0, *vertexBuffer, {0});
     commandBuffers[frameIndex].bindIndexBuffer(indexBuffer, 0, vk::IndexType::eUint16);
+    commandBuffers[frameIndex].bindDescriptorSets(vk::PipelineBindPoint::eGraphics, pipelineLayout, 0,
+                                                  *descriptorSets[frameIndex], nullptr);
     commandBuffers[frameIndex].setViewport(0, vk::Viewport{0.0f, 0.0f, static_cast<float>(swapchainExtent.width),
                                                            static_cast<float>(swapchainExtent.height)});
     commandBuffers[frameIndex].setScissor(0, vk::Rect2D{vk::Offset2D{0, 0}, swapchainExtent});

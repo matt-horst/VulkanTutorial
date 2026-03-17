@@ -245,10 +245,10 @@ add_chapter (22_descriptor_layout
   SHADER 22_shader_ubo
   LIBS glm::glm)
 
-# add_chapter (23_descriptor_sets
-#   SHADER 22_shader_ubo
-#   LIBS glm::glm)
-#
+add_chapter (23_descriptor_sets
+  SHADER 22_shader_ubo
+  LIBS glm::glm)
+
 # add_chapter (24_texture_image
 #   SHADER 22_shader_ubo
 #   TEXTURES ../../images/texture.jpg
