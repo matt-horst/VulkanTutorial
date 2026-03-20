@@ -26,13 +26,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(tinygltf)
 
-FetchContent_Declare(
-    tinyobj
-    GIT_REPOSITORY https://github.com/tinyobjloader/tinyobjloader.git
-    GIT_TAG v1.0.6
-)
-FetchContent_MakeAvailable(tinyobj)
-
 
 if(ENABLE_CPP20_MODULE)
     add_library(VulkanCppModule)
@@ -89,7 +82,6 @@ find_program(SLANGC_EXECUTABLE slangc HINTS $ENV{VULKAN_SDK}/bin REQURIED)
 
 
 
-
 function (add_shaders_target TARGET)
   cmake_parse_arguments ("SHADER" "" "CHAPTER_NAME" "SOURCES" ${ARGN})
   set (SHADERS_DIR ${SHADER_CHAPTER_NAME}/shaders)
@@ -142,7 +134,6 @@ function (add_chapter CHAPTER_NAME)
   target_link_libraries (${CHAPTER_NAME} ktx)
   target_include_directories (${CHAPTER_NAME} PRIVATE ${STB_INCLUDEDIR})
   target_include_directories (${CHAPTER_NAME} PRIVATE ${tinygltf_SOURCE_DIR})
-  target_include_directories (${CHAPTER_NAME} PRIVATE ${tinyobj_SOURCE_DIR})
   target_include_directories (${CHAPTER_NAME} PRIVATE ${ktx_SOURCE_DIR}/include)
 
   target_compile_features (${CHAPTER_NAME} PRIVATE ${cxx_std_20})
@@ -264,12 +255,12 @@ add_chapter (27_depth_buffering
   TEXTURES /images/texture.jpg
   LIBS glm::glm)
 
-# add_chapter (28_model_loading
-#   SHADER 27_shader_depth
-#   MODELS viking_room.obj
-#   TEXTURES viking_room.png
-#   LIBS glm::glm tinyobjloader::tinyobjloader)
-#
+add_chapter (28_model_loading
+  SHADER 27_shader_depth
+  MODELS /models/viking_room.obj
+  TEXTURES /images/viking_room.png
+  LIBS glm::glm)
+
 # add_chapter (29_mipmapping
 #   SHADER 27_shader_depth
 #   MODELS viking_room.obj
