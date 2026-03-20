@@ -254,11 +254,11 @@ add_chapter (24_texture_image
   TEXTURES /images/texture.jpg
   LIBS glm::glm)
 
-# add_chapter (25_sampler
-#   SHADER 22_shader_ubo
-#   TEXTURES ../../images/texture.jpg
-#   LIBS glm::glm)
-#
+add_chapter (25_sampler
+  SHADER 25_shader_sampler
+  TEXTURES /images/texture.jpg
+  LIBS glm::glm)
+
 # add_chapter (26_texture_mapping
 #   SHADER 26_shader_textures
 #   TEXTURES ../../images/texture.jpg
