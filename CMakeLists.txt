@@ -259,16 +259,11 @@ add_chapter (25_sampler
   TEXTURES /images/texture.jpg
   LIBS glm::glm)
 
-# add_chapter (26_texture_mapping
-#   SHADER 26_shader_textures
-#   TEXTURES ../../images/texture.jpg
-#   LIBS glm::glm)
-#
-# add_chapter (27_depth_buffering
-#   SHADER 27_shader_depth
-#   TEXTURES ../../images/texture.jpg
-#   LIBS glm::glm)
-#
+add_chapter (27_depth_buffering
+  SHADER 27_shader_depth
+  TEXTURES /images/texture.jpg
+  LIBS glm::glm)
+
 # add_chapter (28_model_loading
 #   SHADER 27_shader_depth
 #   MODELS viking_room.obj
