@@ -19,12 +19,12 @@ find_package(Ktx REQUIRED)
 
 include(FetchContent)
 
-FetchContent_Declare(
-    tinygltf
-    GIT_REPOSITORY https://github.com/syoyo/tinygltf.git
-    GIT_TAG v2.9.7
-)
-FetchContent_MakeAvailable(tinygltf)
+# FetchContent_Declare(
+#     tinygltf
+#     GIT_REPOSITORY https://github.com/syoyo/tinygltf.git
+#     GIT_TAG v2.9.7
+# )
+# FetchContent_MakeAvailable(tinygltf)
 
 
 if(ENABLE_CPP20_MODULE)
@@ -267,12 +267,12 @@ add_chapter (29_mipmapping
   TEXTURES /images/viking_room.png
   LIBS glm::glm)
 
-# add_chapter (30_multisampling
-#   SHADER 27_shader_depth
-#   MODELS viking_room.obj
-#   TEXTURES viking_room.png
-#   LIBS glm::glm tinyobjloader::tinyobjloader)
-#
+add_chapter (30_multisampling
+  SHADER 27_shader_depth
+  MODELS /models/viking_room.obj
+  TEXTURES /images/viking_room.png
+  LIBS glm::glm)
+
 # add_chapter (31_compute_shader
 #   SHADER 31_shader_compute
 #   LIBS glm::glm)
