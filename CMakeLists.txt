@@ -299,11 +299,11 @@ add_chapter (31_compute_shader
 #   TEXTURES viking_room.png
 #   LIBS glm::glm tinyobjloader::tinyobjloader)
 #
-# add_chapter (35_gltf_ktx
-#   SHADER 27_shader_depth
-#   MODELS viking_room.glb
-#   TEXTURES viking_room.ktx2
-#   LIBS glm::glm tinygltf::tinygltf KTX::ktx)
+add_chapter (35_gltf_ktx
+  SHADER 27_shader_depth
+  MODELS /models/viking_room.glb
+  TEXTURES /images/viking_room.ktx2
+  LIBS glm::glm KTX::ktx)
 #
 # add_chapter (36_multiple_objects
 #   SHADER 27_shader_depth
