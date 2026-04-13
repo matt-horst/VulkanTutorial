@@ -104,9 +104,13 @@ endfunction ()
 function (add_slang_shader_target TARGET)
   cmake_parse_arguments ("SHADER" "" "CHAPTER_NAME" "SOURCES" ${ARGN})
   set (SHADERS_DIR ${SHADER_CHAPTER_NAME}/shaders)
-  file(GLOB HAS_COMPUTE ${CHAPTER_SHADER}.comp)
-  set (ENTRY_POINTS -entry vertMain -entry fragMain -entry compMain)
-  if(HAS_COMPUTE)
+  execute_process(
+      COMMAND grep "compMain" ${SHADER_SOURCES}
+      RESULT_VARIABLE HAS_COMPUTE
+  )
+  # file(GLOB HAS_COMPUTE ${CHAPTER_SHADER}.comp)
+  set (ENTRY_POINTS -entry vertMain -entry fragMain)
+  if(HAS_COMPUTE EQUAL 0)
     list(APPEND ENTRY_POINTS -entry compMain)
   endif()
   add_custom_command (
@@ -178,103 +182,102 @@ function (add_chapter CHAPTER_NAME)
   endif ()
 endfunction ()
 
-# add_chapter (00_base_code)
-#
-# add_chapter (01_instance_creation)
-#
-# add_chapter (02_validation_layers)
-#
-# add_chapter (03_physical_device_selection)
-#
-# add_chapter (04_logical_device)
-#
-# add_chapter (05_window_surface)
-#
-# add_chapter (06_swap_chain_creation)
-#
-# add_chapter (07_image_views)
-#
-# add_chapter (08_graphics_pipeline)
-#
-# add_chapter (09_shader_modules
-#   SHADER 09_shader_base)
-#
-# add_chapter (10_fixed_functions
-#   SHADER 09_shader_base)
-#
-# add_chapter (11_render_pass
-#   SHADER 09_shader_base)
-#
-# add_chapter (12_graphics_pipeline_complete
-#   SHADER 09_shader_base)
-#
-# add_chapter (14_command_buffers
-#   SHADER 09_shader_base)
-#
-# add_chapter (15_hello_triangle
-#   SHADER 09_shader_base)
-#
-# add_chapter (16_frames_in_flight
-#   SHADER 09_shader_base)
-#
-# add_chapter (17_swap_chain_recreation
-#   SHADER 09_shader_base)
-#
-# add_chapter (19_vertexbuffer
-#   SHADER 19_shader_vertexbuffer
-#   LIBS glm::glm)
-#
-# add_chapter (20_staging_buffer
-#   SHADER 19_shader_vertexbuffer
-#   LIBS glm::glm)
-#
-# add_chapter (21_index_buffer
-#   SHADER 19_shader_vertexbuffer
-#   LIBS glm::glm)
-#
-# add_chapter (22_descriptor_layout
-#   SHADER 22_shader_ubo
-#   LIBS glm::glm)
-#
-# add_chapter (23_descriptor_sets
-#   SHADER 22_shader_ubo
-#   LIBS glm::glm)
-#
-# add_chapter (24_texture_image
-#   SHADER 22_shader_ubo
-#   TEXTURES /images/texture.jpg
-#   LIBS glm::glm)
-#
-# add_chapter (25_sampler
-#   SHADER 25_shader_sampler
-#   TEXTURES /images/texture.jpg
-#   LIBS glm::glm)
-#
-# add_chapter (27_depth_buffering
-#   SHADER 27_shader_depth
-#   TEXTURES /images/texture.jpg
-#   LIBS glm::glm)
-#
-# add_chapter (28_model_loading
-#   SHADER 27_shader_depth
-#   MODELS /models/viking_room.obj
-#   TEXTURES /images/viking_room.png
-#   LIBS glm::glm)
-#
-# add_chapter (29_mipmapping
-#   SHADER 27_shader_depth
-#   MODELS /models/viking_room.obj
-#   TEXTURES /images/viking_room.png
-#   LIBS glm::glm)
-#
-# add_chapter (30_multisampling
-#   SHADER 27_shader_depth
-#   MODELS /models/viking_room.obj
-#   TEXTURES /images/viking_room.png
-#   LIBS glm::glm)
+add_chapter (00_base_code)
+
+add_chapter (01_instance_creation)
+
+add_chapter (02_validation_layers)
+
+add_chapter (03_physical_device_selection)
+
+add_chapter (04_logical_device)
+
+add_chapter (05_window_surface)
+
+add_chapter (06_swap_chain_creation)
+
+add_chapter (07_image_views)
+
+add_chapter (08_graphics_pipeline)
+
+add_chapter (09_shader_modules
+  SHADER 09_shader_base)
+
+add_chapter (10_fixed_functions
+  SHADER 09_shader_base)
+
+add_chapter (11_render_pass
+  SHADER 09_shader_base)
+
+add_chapter (12_graphics_pipeline_complete
+  SHADER 09_shader_base)
+
+add_chapter (14_command_buffers
+  SHADER 09_shader_base)
+
+add_chapter (15_hello_triangle
+  SHADER 09_shader_base)
+
+add_chapter (16_frames_in_flight
+  SHADER 09_shader_base)
+
+add_chapter (17_swap_chain_recreation
+  SHADER 09_shader_base)
+
+add_chapter (19_vertexbuffer
+  SHADER 19_shader_vertexbuffer
+  LIBS glm::glm)
+
+add_chapter (20_staging_buffer
+  SHADER 19_shader_vertexbuffer
+  LIBS glm::glm)
+
+add_chapter (21_index_buffer
+  SHADER 19_shader_vertexbuffer
+  LIBS glm::glm)
+
+add_chapter (22_descriptor_layout
+  SHADER 22_shader_ubo
+  LIBS glm::glm)
+
+add_chapter (23_descriptor_sets
+  SHADER 22_shader_ubo
+  LIBS glm::glm)
+
+add_chapter (24_texture_image
+  SHADER 22_shader_ubo
+  TEXTURES /images/texture.jpg
+  LIBS glm::glm)
+
+add_chapter (25_sampler
+  SHADER 25_shader_sampler
+  TEXTURES /images/texture.jpg
+  LIBS glm::glm)
+
+add_chapter (27_depth_buffering
+  SHADER 27_shader_depth
+  TEXTURES /images/texture.jpg
+  LIBS glm::glm)
+
+add_chapter (28_model_loading
+  SHADER 27_shader_depth
+  MODELS /models/viking_room.obj
+  TEXTURES /images/viking_room.png
+  LIBS glm::glm)
+
+add_chapter (29_mipmapping
+  SHADER 27_shader_depth
+  MODELS /models/viking_room.obj
+  TEXTURES /images/viking_room.png
+  LIBS glm::glm)
+
+add_chapter (30_multisampling
+  SHADER 27_shader_depth
+  MODELS /models/viking_room.obj
+  TEXTURES /images/viking_room.png
+  LIBS glm::glm)
 
 add_chapter (31_compute_shader
-  HAS_COMPUTE true
   SHADER 31_shader_compute
   LIBS glm::glm)
 
