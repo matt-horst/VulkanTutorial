@@ -19,14 +19,6 @@ find_package(Ktx REQUIRED)
 
 include(FetchContent)
 
-# FetchContent_Declare(
-#     tinygltf
-#     GIT_REPOSITORY https://github.com/syoyo/tinygltf.git
-#     GIT_TAG v2.9.7
-# )
-# FetchContent_MakeAvailable(tinygltf)
-
-
 if(ENABLE_CPP20_MODULE)
     add_library(VulkanCppModule)
     add_library(Vulkan::cppm ALIAS VulkanCppModule)
@@ -304,13 +296,13 @@ add_chapter (35_gltf_ktx
   MODELS /models/viking_room.glb
   TEXTURES /images/viking_room.ktx2
   LIBS glm::glm KTX::ktx)
-#
-# add_chapter (36_multiple_objects
-#   SHADER 27_shader_depth
-#   MODELS viking_room.glb
-#   TEXTURES viking_room.ktx2
-#   LIBS glm::glm tinygltf::tinygltf KTX::ktx)
-#
+
+add_chapter (36_multiple_objects
+  SHADER 27_shader_depth
+  MODELS /models/viking_room.glb
+  TEXTURES /images/viking_room.ktx2
+  LIBS glm::glm KTX::ktx)
+
 # add_chapter (37_multithreading
 #   SHADER 37_shader_compute
 #   LIBS glm::glm)
